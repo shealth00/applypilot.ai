@@ -1,3 +1,12 @@
+Metadata-Version: 2.4
+Name: applypilot
+Version: 0.1.0
+Summary: Core domain models for tracking job applications.
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+
 # applypilot.ai
 
 Core domain models for tracking job applications.
