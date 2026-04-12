@@ -1,8 +1,22 @@
 # applypilot.ai
 
-Core domain models for tracking job applications.
+Web application lives in [`web/`](./web/) (Next.js App Router, TypeScript, Tailwind CSS).
 
-## Setup
+Core domain models for tracking job applications live in [`src/applypilot/`](./src/applypilot/).
+
+## Local development
+
+### Web frontend
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Python domain package
 
 ```bash
 python3 -m venv .venv
@@ -11,11 +25,15 @@ python -m pip install --upgrade pip
 pip install -e ".[dev]"
 ```
 
-## Run tests
+## Scripts
 
-```bash
-pytest
-```
+| Command         | Description          |
+| --------------- | -------------------- |
+| `npm run dev`   | Development server   |
+| `npm run build` | Production build     |
+| `npm run start` | Run production server|
+| `npm run lint`  | ESLint               |
+| `pytest`        | Python domain tests  |
 
 ## Usage example
 
