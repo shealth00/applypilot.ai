@@ -13,7 +13,7 @@ applypilot.ai is a job application tracking tool with two components:
 
 ### Caveats
 
-- The `main` branch only has a README. All code lives on feature branches (`cursor/project-development-a1b1` for web, `cursor/project-continuation-e0bc` for Python). Both must be merged before working with the full codebase.
+- The full codebase is on `main` (merged via PR #3). Older draft PRs for the standalone web and Python branches may still exist on GitHub but are superseded; close them if they are no longer needed.
 - `python3.12-venv` must be installed (`sudo apt-get install -y python3.12-venv`) before creating the Python venv. The update script handles this.
 - Next.js 16 has breaking API changes from earlier versions. See `web/AGENTS.md` — always check `node_modules/next/dist/docs/` before writing Next.js code.
 - The Python package has no runtime dependencies; `pytest` is the only dev dependency.
