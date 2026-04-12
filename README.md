@@ -37,7 +37,12 @@ pip install -e ".[dev]"
 
 ## Deploy / host (web)
 
-The Next.js app lives under **`web/`** and is built with [`output: "standalone"`](web/next.config.ts) for Docker and similar hosts.
+The Next.js app lives under **`web/`** and supports two build modes (see [`web/next.config.ts`](web/next.config.ts)):
+
+| Mode | When | Output |
+|------|------|--------|
+| **standalone** (default) | `npm run build` with no extra env | Node server; used by [`web/Dockerfile`](web/Dockerfile), Vercel, etc. |
+| **static export** | `NEXT_OUTPUT_MODE=export` | Static files for GitHub Pages |
 
 ### Vercel (dashboard)
 
@@ -64,7 +69,16 @@ docker run -p 3000:3000 applypilot-web
 
 Open [http://localhost:3000](http://localhost:3000). Push the image to a registry and run it on your platform of choice.
 
-### GitHub Actions (optional CLI deploy)
+### GitHub Pages (static)
+
+On pushes to `main`, [`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml) builds with `NEXT_OUTPUT_MODE=export` and deploys the `web/out` folder to GitHub Pages.
+
+- **Live URL (after Pages is enabled):** `https://shealth00.github.io/applypilot.ai/`
+- **One-time setup:** **Settings → Pages → Build and deployment** → source **GitHub Actions**.
+
+The workflow sets `NEXT_PUBLIC_BASE_PATH=/applypilot.ai` so assets resolve under the default project Pages path.
+
+### GitHub Actions (optional Vercel CLI deploy)
 
 [`.github/workflows/vercel-deploy.yml`](./.github/workflows/vercel-deploy.yml) runs on **manual** `workflow_dispatch` and deploys from `web/` using the Vercel CLI. Add repository secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`. If you use Vercel’s normal Git integration for the same branch, skip this workflow to avoid duplicate deploys.
 
