@@ -35,14 +35,44 @@ pip install -e ".[dev]"
 | `npm run lint`  | ESLint               |
 | `pytest`        | Python domain tests  |
 
-## Hosting (GitHub Pages)
+## Deploy / host (web)
 
-The Next.js app is built as a static export and deployed with GitHub Actions when changes land on `main`.
+The Next.js app supports two build modes (see [`web/next.config.ts`](web/next.config.ts)):
 
-- **Live site (after Pages is enabled):** `https://shealth00.github.io/applypilot.ai/`
-- **One-time setup:** In the repository on GitHub, enable **Settings → Pages → Build and deployment → GitHub Actions** (source: GitHub Actions).
+| Mode | When | Output |
+|------|------|--------|
+| **standalone** (default) | `npm run build` with no extra env | Node server; used by [`web/Dockerfile`](web/Dockerfile), Vercel, etc. |
+| **static export** | `NEXT_OUTPUT_MODE=export` | Static files for GitHub Pages |
 
-Production builds use `NEXT_PUBLIC_BASE_PATH=/applypilot.ai` so asset URLs match the default project Pages path.
+### Option A: Vercel (simplest for Next.js)
+
+1. Push `main` to GitHub (already the default remote).
+2. In [Vercel](https://vercel.com), **Add New Project** → import this repo.
+3. Set **Root Directory** to `web`, then deploy. Vercel runs `npm run build` and hosts the app on a `*.vercel.app` URL (add a custom domain under Project Settings → Domains).
+
+### Option B: Docker (Fly.io, Railway, ECS, etc.)
+
+From the repository root:
+
+```bash
+docker build -f web/Dockerfile -t applypilot-web web
+docker run -p 3000:3000 applypilot-web
+```
+
+Open [http://localhost:3000](http://localhost:3000). Push the image to a registry and run it on your platform of choice.
+
+### Option C: GitHub Pages (static)
+
+On pushes to `main`, [`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml) builds with `NEXT_OUTPUT_MODE=export` and deploys the `web/out` folder to GitHub Pages.
+
+- **Live URL (after Pages is enabled):** `https://shealth00.github.io/applypilot.ai/`
+- **One-time setup:** **Settings → Pages → Build and deployment** → source **GitHub Actions**.
+
+The workflow sets `NEXT_PUBLIC_BASE_PATH=/applypilot.ai` so assets resolve under the default project Pages path.
+
+### CI
+
+[`.github/workflows/web-ci.yml`](.github/workflows/web-ci.yml) runs lint and production build on pushes and PRs that touch `web/`.
 
 ## Usage example
 
