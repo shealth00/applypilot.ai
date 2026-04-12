@@ -71,10 +71,13 @@ Open [http://localhost:3000](http://localhost:3000). Push the image to a registr
 
 ### GitHub Pages (static)
 
-On pushes to `main`, [`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml) builds with `NEXT_OUTPUT_MODE=export` and deploys the `web/out` folder to GitHub Pages.
+[`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml) builds with `NEXT_OUTPUT_MODE=export` on every push to `main` (validates the static export). **Deploying** to Pages is opt-in so pushes do not fail before the feature is turned on:
 
-- **Live URL (after Pages is enabled):** `https://shealth00.github.io/applypilot.ai/`
-- **One-time setup:** **Settings → Pages → Build and deployment** → source **GitHub Actions**.
+1. **Enable Pages:** **Settings → Pages → Build and deployment** → source **GitHub Actions**.
+2. **Opt in to deploy on push:** **Settings → Secrets and variables → Actions → Variables** → add `GITHUB_PAGES_DEPLOY` = `true`.
+3. Or use **Actions → Deploy web to GitHub Pages → Run workflow** (always runs build + deploy).
+
+- **Live URL (after a successful deploy):** `https://shealth00.github.io/applypilot.ai/`
 
 The workflow sets `NEXT_PUBLIC_BASE_PATH=/applypilot.ai` so assets resolve under the default project Pages path.
 
