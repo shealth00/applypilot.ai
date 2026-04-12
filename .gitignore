@@ -4,6 +4,9 @@
 .idea/
 .vscode/
 
+# Local release archives (see PROJECT_MAP.md)
+applypilot.ai-*.zip
+
 # Python
 __pycache__/
 *.py[cod]
