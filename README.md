@@ -37,15 +37,23 @@ pip install -e ".[dev]"
 
 ## Deploy / host (web)
 
-The Next.js app is built with [`output: "standalone"`](web/next.config.ts) for Docker and similar hosts.
+The Next.js app lives under **`web/`** and is built with [`output: "standalone"`](web/next.config.ts) for Docker and similar hosts.
 
-### Option A: Vercel (simplest for Next.js)
+### Vercel (dashboard)
 
-1. Push `main` to GitHub (already the default remote).
-2. In [Vercel](https://vercel.com), **Add New Project** → import this repo.
-3. Set **Root Directory** to `web`, then deploy. Vercel runs `npm run build` and hosts the app on a `*.vercel.app` URL (add a custom domain under Project Settings → Domains).
+1. In [Vercel](https://vercel.com/new), import this GitHub repo.
+2. Set **Root Directory** to `web`, then deploy. You get a `*.vercel.app` URL; add a custom domain under Project Settings → Domains.
 
-### Option B: Docker (Fly.io, Railway, ECS, etc.)
+### Vercel CLI (local)
+
+```bash
+cd web
+npx vercel login
+npx vercel        # preview
+npx vercel --prod
+```
+
+### Docker (Fly.io, Railway, ECS, etc.)
 
 From the repository root:
 
@@ -55,6 +63,10 @@ docker run -p 3000:3000 applypilot-web
 ```
 
 Open [http://localhost:3000](http://localhost:3000). Push the image to a registry and run it on your platform of choice.
+
+### GitHub Actions (optional CLI deploy)
+
+[`.github/workflows/vercel-deploy.yml`](./.github/workflows/vercel-deploy.yml) runs on **manual** `workflow_dispatch` and deploys from `web/` using the Vercel CLI. Add repository secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`. If you use Vercel’s normal Git integration for the same branch, skip this workflow to avoid duplicate deploys.
 
 ### CI
 
@@ -77,27 +89,3 @@ app.transition_to(ApplicationStatus.APPLIED)
 app.transition_to(ApplicationStatus.INTERVIEW)
 app.transition_to(ApplicationStatus.OFFER)
 ```
-
-## Deployment (web / hosting)
-
-The Next.js app is under **`web/`**. Production hosting is easiest on **[Vercel](https://vercel.com)** (native Next.js support).
-
-### Option A — Vercel + GitHub (recommended)
-
-1. Import this repo in the [Vercel dashboard](https://vercel.com/new).
-2. Set **Root Directory** to `web` (required because the app is not at the repo root).
-3. Leave **Build Command** as `npm run build` and **Output** as default for Next.js.
-4. Deploy. Every push to the connected branch triggers a new deployment.
-
-### Option B — Manual CLI (from your machine)
-
-```bash
-cd web
-npx vercel login
-npx vercel        # preview
-npx vercel --prod
-```
-
-### Option C — GitHub Actions
-
-A workflow is defined at [`.github/workflows/vercel-deploy.yml`](./.github/workflows/vercel-deploy.yml). It runs only when you trigger it manually (`workflow_dispatch`) and expects `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` in the repo secrets. Use this if you prefer CI deploys instead of Vercel’s built-in Git integration.
