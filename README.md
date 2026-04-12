@@ -35,6 +35,31 @@ pip install -e ".[dev]"
 | `npm run lint`  | ESLint               |
 | `pytest`        | Python domain tests  |
 
+## Deploy / host (web)
+
+The Next.js app is built with [`output: "standalone"`](web/next.config.ts) for Docker and similar hosts.
+
+### Option A: Vercel (simplest for Next.js)
+
+1. Push `main` to GitHub (already the default remote).
+2. In [Vercel](https://vercel.com), **Add New Project** → import this repo.
+3. Set **Root Directory** to `web`, then deploy. Vercel runs `npm run build` and hosts the app on a `*.vercel.app` URL (add a custom domain under Project Settings → Domains).
+
+### Option B: Docker (Fly.io, Railway, ECS, etc.)
+
+From the repository root:
+
+```bash
+docker build -f web/Dockerfile -t applypilot-web web
+docker run -p 3000:3000 applypilot-web
+```
+
+Open [http://localhost:3000](http://localhost:3000). Push the image to a registry and run it on your platform of choice.
+
+### CI
+
+[`.github/workflows/web-ci.yml`](.github/workflows/web-ci.yml) runs lint and production build on pushes and PRs that touch `web/`.
+
 ## Usage example
 
 ```python
