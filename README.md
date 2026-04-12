@@ -35,6 +35,15 @@ pip install -e ".[dev]"
 | `npm run lint`  | ESLint               |
 | `pytest`        | Python domain tests  |
 
+## Hosting (GitHub Pages)
+
+The Next.js app is built as a static export and deployed with GitHub Actions when changes land on `main`.
+
+- **Live site (after Pages is enabled):** `https://shealth00.github.io/applypilot.ai/`
+- **One-time setup:** In the repository on GitHub, enable **Settings → Pages → Build and deployment → GitHub Actions** (source: GitHub Actions).
+
+Production builds use `NEXT_PUBLIC_BASE_PATH=/applypilot.ai` so asset URLs match the default project Pages path.
+
 ## Usage example
 
 ```python
