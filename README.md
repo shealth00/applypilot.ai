@@ -81,6 +81,8 @@ Open [http://localhost:3000](http://localhost:3000). Push the image to a registr
 
 The workflow sets `NEXT_PUBLIC_BASE_PATH=/applypilot.ai` so assets resolve under the default project Pages path.
 
+If **Deploy to GitHub Pages** fails with “Failed to create deployment” / HTTP 404, Pages is still disabled: complete step **1** above, then **re-run** the workflow. The deploy job also runs a quick API check and exits with a clear error when Pages is off.
+
 ### GitHub Actions (optional Vercel CLI deploy)
 
 [`.github/workflows/vercel-deploy.yml`](./.github/workflows/vercel-deploy.yml) runs on **manual** `workflow_dispatch` and deploys from `web/` using the Vercel CLI. Add repository secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`. If you use Vercel’s normal Git integration for the same branch, skip this workflow to avoid duplicate deploys.
