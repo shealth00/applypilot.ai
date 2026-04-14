@@ -1,0 +1,8 @@
+{
+  "name": "applypilot-workspace",
+  "private": true,
+  "description": "Root scripts for applypilot.ai (web/ is the Next.js app)",
+  "scripts": {
+    "zip": "bash scripts/zip-project.sh"
+  }
+}

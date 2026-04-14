@@ -74,12 +74,10 @@ These appear after install or build; they are normal and reproducible.
 | **`applypilot.ai-complete.zip`** | Entire project folder on disk: `.git`, `web/node_modules`, `web/.next` if present, etc. Large; use for a full offline mirror. |
 | **`applypilot.ai-source.zip`** | `git archive` at current `HEAD` — tracked source only (no `node_modules`, no `.git`). Small; use for sharing or clean backup. |
 
-Regenerate with:
+Regenerate from the repository root:
 
 ```bash
-# Complete (from repo root)
-zip -rq applypilot.ai-complete.zip . -x "./applypilot.ai-complete.zip" -x "./applypilot.ai-source.zip"
-
-# Source-only
-git archive --format=zip -o applypilot.ai-source.zip HEAD
+npm run zip
 ```
+
+This runs [`scripts/zip-project.sh`](./scripts/zip-project.sh) (same as the manual `zip` / `git archive` commands documented previously).

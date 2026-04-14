@@ -29,11 +29,24 @@ pip install -e ".[dev]"
 
 | Command         | Description          |
 | --------------- | -------------------- |
-| `npm run dev`   | Development server   |
-| `npm run build` | Production build     |
-| `npm run start` | Run production server|
-| `npm run lint`  | ESLint               |
+| `npm run zip` (repo root) | Build `applypilot.ai-complete.zip` and `applypilot.ai-source.zip`; see [`PROJECT_MAP.md`](./PROJECT_MAP.md) |
+| `npm run dev` (in `web/`) | Development server   |
+| `npm run build` (in `web/`) | Production build     |
+| `npm run start` (in `web/`) | Run production server|
+| `npm run lint` (in `web/`)  | ESLint               |
 | `pytest`        | Python domain tests  |
+
+### Extra git remote (e.g. `shealthmedia`)
+
+There is no `shealthmedia` remote in the default clone. To pull from another fork or org, add it once, then pull a **branch name** (not the remote name alone):
+
+```bash
+git remote add shealthmedia https://github.com/ORG/applypilot.ai.git
+git fetch shealthmedia
+git pull shealthmedia main
+```
+
+Replace `ORG` and `main` with the organization and branch you use.
 
 ## Deploy / host (web)
 
