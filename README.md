@@ -4,6 +4,16 @@ Web application lives in [`web/`](./web/) (Next.js App Router, TypeScript, Tailw
 
 Core domain models for tracking job applications live in [`src/applypilot/`](./src/applypilot/).
 
+## Workspace location (Google Drive)
+
+The project directory may live under **Google Drive** (e.g. Google Drive for desktop). The same files are available **in the cloud** via [Google Drive](https://drive.google.com) and locally wherever Drive syncs them on your machine.
+
+**Tips when the repo is on Drive:**
+
+- Prefer **GitHub** as the source of truth; clone or pull to refresh after moving folders.
+- After relocating, open a terminal in the **new** project root and reinstall: `cd web && npm ci`, and recreate `.venv` for Python if needed.
+- Large generated folders (`web/node_modules`, `web/.next`) sync slowly; they are gitignored. Avoid editing the same clone from two machines before Drive finishes syncing.
+
 ## Local development
 
 ### Web frontend

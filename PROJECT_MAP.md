@@ -2,6 +2,8 @@
 
 This document merges the repository layout into a single map: **what lives where**, **how the pieces connect**, and **what is generated locally** versus **tracked in Git**.
 
+**Location:** The checkout may reside under a **Google Drive** folder (path moved there for access from Drive and synced devices). Browse or share files from [Google Drive](https://drive.google.com); for development, use the local synced path or a normal `git clone` elsewhere.
+
 ## Architecture (one repo, two runtimes)
 
 | Area | Path | Role |

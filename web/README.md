@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+The parent monorepo may live under **Google Drive**; see the root [`README.md`](../README.md) for workspace location notes.
+
 ## Getting Started
 
 First, run the development server:

@@ -13,6 +13,7 @@ applypilot.ai is a job application tracking tool with two components:
 
 ### Caveats
 
+- **Google Drive:** The project path may be under a Drive-synced folder. Files are also reachable via the Google Drive web/app. If sync conflicts or slow `node_modules` appear, clone to a non-Drive path for heavy builds or ensure only one active working copy.
 - The full codebase is on `main` (merged via PR #3). Older draft PRs for the standalone web and Python branches may still exist on GitHub but are superseded; close them if they are no longer needed.
 - `python3.12-venv` must be installed (`sudo apt-get install -y python3.12-venv`) before creating the Python venv. The update script handles this.
 - Next.js 16 has breaking API changes from earlier versions. See `web/AGENTS.md` — always check `node_modules/next/dist/docs/` before writing Next.js code.
